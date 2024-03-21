@@ -9,16 +9,15 @@ export default function Pokemons() {
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
-      console.log(data)
       const promises = Object.values(data.results).map((pokemon) => getPokemon(pokemon));
       const pokemonData = await Promise.all(promises);
-      console.log(pokemonData)
       setPokemons(pokemonData)
     })();
   }, [page]);
 
   async function getPokemon(pokemon) {
     const { data } = await axios.get(pokemon.url);
+    console.log(data)
     return data;
   }
 

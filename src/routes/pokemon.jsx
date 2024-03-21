@@ -23,7 +23,29 @@ const Pokemon = () => {
         fetchData();
     }, []);
 
-    console.log(pokemon.sprites?.front_default)
+    function addToPokedex(pokemon) {
+        // let pokedex = JSON.parse(localStorage.get('pokedex'))
+        // let newPokedex = pokedex
+
+        console.log("add to pokedex")
+
+        let pokemon = [pokemon, pokemon, pokemon]
+
+        // REGARDE CA
+        if (!localStorage.get('pokedex')) {
+            localStorage.setItem('pokedex', [])
+        } else {
+            let pokedex = JSON.parse(localStorage.getItem('pokedex'))
+            pokedex.push(pokemon)
+            localStorage.setItem('pokedex', pokedex)
+        }
+        // REGARDE CA
+
+        localStorage.setItem('pokedex', JSON.stringify(pokemon))
+
+
+        console.log(JSON.parse(localStorage.getItem('pokedex')))
+    }
 
     // to implement 
     return (
@@ -54,7 +76,7 @@ const Pokemon = () => {
                         ))}
                     </ul>
                     </Card.Text>
-                    <Button variant="outline-success" style={{marginTop: '25px', width: '50%', textAlign: 'center', marginInline: 'auto'}}>
+                    <Button onClick={addToPokedex(pokemon)} variant="outline-success" style={{marginTop: '25px', width: '50%', textAlign: 'center', marginInline: 'auto'}}>
                         Ajouter au pokédex
                     </Button>
                 </Card.Body>
