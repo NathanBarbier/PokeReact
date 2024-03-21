@@ -5,7 +5,7 @@ const Types = ({ type }) => {
     const color = types.find((t) => t.nom === type).couleur
 
     return (
-        <div className='col-6'>
+        <div className='col-xl-6'>
             <div className='type' style={{ background: color }}>
                 {type}
             </div>

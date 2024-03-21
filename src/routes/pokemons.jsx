@@ -4,11 +4,11 @@ import ElementListPokemon from "../components/elementListPokemon";
 
 export default function Pokemons() {
   const [pokemons, setPokemons] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
+      const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${page * 20}&limit=20`);
       console.log(data)
       const promises = Object.values(data.results).map((pokemon) => getPokemon(pokemon));
       const pokemonData = await Promise.all(promises);
@@ -25,7 +25,7 @@ export default function Pokemons() {
   return (
     <div className='App-main'>
       <h1 className='mt-5 mb-3'>Bienvenue sur le Pokedex !!!</h1>
-      <div className='container mb-5'>
+      <div className='container mb-5 content'>
         {Object.values(pokemons).map((pokemon) => {
           return <ElementListPokemon
             id={pokemon.id}
@@ -34,6 +34,16 @@ export default function Pokemons() {
             image={pokemon.sprites.front_default}
           />
         })}
+      </div>
+      <div className="container w-50 mb-5">
+        <div className='row'>
+          <div className="col-lg-6 mt-2">
+            <button className='my-btn' onClick={() => { page > 0 && setPage(page - 1) }}>Précédent</button>
+          </div>
+          <div className="col-lg-6 mt-2">
+            <button className='my-btn' onClick={() => { setPage(page + 1) }}>Suivant</button>
+          </div>
+        </div>
       </div>
     </div>
   );
