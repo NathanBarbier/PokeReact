@@ -7,23 +7,30 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from "./routes/errorPage";
-import Pokemons, { loader as pokemonLoader } from "./routes/pokemons";
-import Pokedex, { loader as pokedexLoader } from "./routes/pokedex";
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
+import Pokemons from "./routes/pokemons";
+import Pokedex from "./routes/pokedex";
+import Pokemon from "./routes/pokemon";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Pokemons/>,
-    errorElement : <ErrorPage/>,
-    children : [
-      {
-        path : "pokedex/",
-        element : <Pokedex/>,
-        loader: pokedexLoader
-      }
+    element: <Pokemons />,
+    errorElement: <ErrorPage />,
+    children: [{
+      path: "pokemons/",
+      element: <Pokemons />,
+    },
+    {
+      path: "pokedex/",
+      element: <Pokedex />,
+    },
+    {
+      path: "pokemon/:pokemonId/",
+      element: <Pokemon />,
+    }
     ]
   },
 ]);
