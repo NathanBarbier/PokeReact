@@ -17,17 +17,14 @@ const router = createBrowserRouter([
     path: "/",
     element: <Pokemons />,
     errorElement: <ErrorPage />,
-    children: [{
-      path: "pokemons/",
-      element: <Pokemons />,
+    children: [
+    {
+      path: "pokemon/:pokemonId/",
+      element: <Pokemon />,
     },
     {
       path: "pokedex/",
       element: <Pokedex />,
-    },
-    {
-      path: "pokemon/:pokemonId/",
-      element: <Pokemon />,
     }
     ]
   },

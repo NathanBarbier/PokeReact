@@ -4,8 +4,9 @@ export async function getPokemons() {
 
 export default function Pokemons() {
   return (
-    <div>
-      <h1>Bienvenue sur le Pokedex !!!</h1>
+    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <h1>LISTE DES POKEMONS</h1>
+      
       {/* TODO */}
 
       {/* RECUPERER LES 20 PREMIERS POKEMONS AVEC L'API */}
