@@ -8,21 +8,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const Pokemon = () => {
-    /**
-     * Fetch :
-     * - nom
-     * - numéro
-     * - type(s)
-     * - images
-     * - bouton ajouter au pokédex
-     * 
-     * GET https://pokeapi.co/api/v2/pokemon/{id or name}/ (name, id, types, sprites (images))
-     * 
-     * 
-     * 
-     */
-
-
     // Retrieve pokemon id from URL
     const { pokemonId } = useParams();
 
@@ -38,8 +23,6 @@ const Pokemon = () => {
         fetchData();
     }, []);
 
-
-    // const pokemon = axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
     console.log(pokemon.sprites?.front_default)
 
     // to implement 
