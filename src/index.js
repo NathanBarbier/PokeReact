@@ -10,24 +10,22 @@ import ErrorPage from "./routes/errorPage";
 import Pokemons from "./routes/pokemons";
 import Pokedex from "./routes/pokedex";
 import Pokemon from "./routes/pokemon";
-
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Pokemons />,
-    errorElement: <ErrorPage />,
-    children: [
+    { 
+      path: "/",
+      element: <Pokemons />,
+      errorElement: <ErrorPage />,
+    },
     {
-      path: "pokemon/:pokemonId/",
+      path: "/pokemon/:pokemonId/",
       element: <Pokemon />,
     },
     {
       path: "pokedex/",
       element: <Pokedex />,
     }
-    ]
-  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
