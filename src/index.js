@@ -1,25 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import * as React from "react";
+import * as ReactDOM from "react-dom/client";
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import ErrorPage from "./routes/errorPage";
+import Pokemons, { loader as pokemonLoader } from "./routes/pokemons";
+import Pokedex, { loader as pokedexLoader } from "./routes/pokedex";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
+    element: <Pokemons/>,
     errorElement : <ErrorPage/>,
-    loader : rootLoader,
-    action : rootAction,
+    loader : pokemonLoader,
     children : [{
         path : "pokemons/",
         element : <Pokemons/>,
-        loader : pokemonsLoader,
+        loader : pokemonLoader
     },
     {
       path : "pokedex/",
       element : <Pokedex/>,
-      loader : PokedexLoader,
+      loader: pokemonLoader
     }
   ]
   },

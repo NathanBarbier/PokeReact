@@ -1,10 +1,16 @@
-/* eslint-disable no-restricted-globals */
+import { useLoaderData } from "react-router-dom";
 
-import { Form, useLoaderData } from "react-router-dom";
+export async function loader() {
+  const pokedex = await getPokedex();
+  return { pokedex };
+}
 
-export default function Pokemons() {
+export async function getPokedex() {
+  return null;
+}
 
-  const { contact } = useLoaderData();
+export default function Pokedex() {
+  const pokemons = useLoaderData();
 
   return (
     <div id="pokedex">
