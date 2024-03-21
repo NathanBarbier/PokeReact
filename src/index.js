@@ -9,6 +9,8 @@ import {
 import ErrorPage from "./routes/errorPage";
 import Pokemons, { loader as pokemonLoader } from "./routes/pokemons";
 import Pokedex, { loader as pokedexLoader } from "./routes/pokedex";
+import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
 
 
 const router = createBrowserRouter([
@@ -16,24 +18,21 @@ const router = createBrowserRouter([
     path: "/",
     element: <Pokemons/>,
     errorElement : <ErrorPage/>,
-    loader : pokemonLoader,
-    children : [{
-        path : "pokemons/",
-        element : <Pokemons/>,
-        loader : pokemonLoader
-    },
-    {
-      path : "pokedex/",
-      element : <Pokedex/>,
-      loader: pokemonLoader
-    }
-  ]
+    children : [
+      {
+        path : "pokedex/",
+        element : <Pokedex/>,
+        loader: pokedexLoader
+      }
+    ]
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <div className="App">
+      <RouterProvider router={router} />
+    </div>
   </React.StrictMode>
 );
 
