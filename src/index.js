@@ -7,6 +7,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from "./routes/errorPage";
+import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
 import Pokemons from "./routes/pokemons";
 import Pokedex from "./routes/pokedex";
 import Pokemon from "./routes/pokemon";
@@ -35,7 +37,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <div className="App">
+      <RouterProvider router={router} />
+    </div>
   </React.StrictMode>
 );
 
