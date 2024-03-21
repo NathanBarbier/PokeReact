@@ -4,10 +4,30 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root/>,
+    errorElement : <ErrorPage/>,
+    loader : rootLoader,
+    action : rootAction,
+    children : [{
+        path : "pokemons/",
+        element : <Pokemons/>,
+        loader : pokemonsLoader,
+    },
+    {
+      path : "pokedex/",
+      element : <Pokedex/>,
+      loader : PokedexLoader,
+    }
+  ]
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
