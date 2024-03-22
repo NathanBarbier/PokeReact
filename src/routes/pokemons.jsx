@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ElementListPokemon from "../components/elementListPokemon";
+import { Link } from 'react-router-dom';
 
 export default function Pokemons() {
   const [allPokemons, setAllPokemons] = useState([]);
@@ -12,9 +13,7 @@ export default function Pokemons() {
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1302`);
-      const promises = Object.values(data.results).map((pokemon) => getPokemon(pokemon));
-      const pokemonData = await Promise.all(promises);
-      setAllPokemons(pokemonData)
+      setAllPokemons(data.results);
     })();
   }, []);
 
@@ -25,39 +24,48 @@ export default function Pokemons() {
  
     setMaxPage(Math.ceil(filteredPokemon.length / 50))
 
-    setPokemons(
-      Object.values(filteredPokemon).slice((page - 1) * 50, page * 50)
-    )
+    let paginatedPokemon = Object.values(filteredPokemon).slice((page - 1) * 50, page * 50)
 
+    getPokemons(paginatedPokemon);
 
   }, [page, allPokemons, filter])
 
-  async function getPokemon(pokemon) {
-    const { data } = await axios.get(pokemon.url);
-    return data;
+  async function getPokemons(paginatedPokemon) {
+    const promises = paginatedPokemon.map(async (pokemon) => await axios.get(pokemon.url));
+    const pokemonData = await Promise.all(promises);
+    setPokemons(pokemonData)
   }
 
   return (
     <div className='App-main'>
       <h1 className='mt-5 mb-3'>Bienvenue sur la liste des Pokemon !!!</h1>
-      <input type="text" name='text' onChange={(e) => setFilter(e.currentTarget.value)} />
-      <div className='container mb-5'>
-        {pokemons.map((pokemon) => {
+      <div className="row w-75 my-auto my-5">
+        <div className="col-6">
+          <input placeholder='Filtrer les Pokemon' type="text" name='text' onChange={(e) => setFilter(e.currentTarget.value)} />
+        </div>
+        <div className="col-6">
+          <Link to="/pokedex">
+            <button className="btn btn-info"> Voir ton Pokedex </button>
+          </Link> 
+        </div>
+      </div>
+      
+      <div className='container mb-5'>   
+
+        {pokemons?.map((pokemon) => {
           return <ElementListPokemon
-            id={pokemon.id}
-            name={pokemon.name}
-            types={pokemon.types}
-            image={pokemon.sprites.front_default}
+            key={pokemon.data.id}
+            pokemon={pokemon.data}
           />
         })}
       </div>
       <div className="container w-50 mb-5">
         <div className='row'>
           <div className="col-lg-6 mt-2">
-            <button className='my-btn' onClick={() => { page <= 1 ? setPage(maxPage) : setPage(page - 1) }}>Précédent</button>
+            <a href='#' className='my-btn' onClick={() => { page <= 1 ? setPage(maxPage) : setPage(page - 1) }}>Précédent</a>
           </div>
           <div className="col-lg-6 mt-2">
-            <button className='my-btn' onClick={() => { page >= maxPage ? setPage(1) : setPage(page + 1) }}>Suivant</button>
+            <a href='#' className='my-btn' onClick={() => { page >= maxPage ? setPage(1) : setPage(page + 1) }}>Suivant</a>
           </div>
         </div>
       </div>

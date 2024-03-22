@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ElementListPokemon from "../components/elementListPokemon";
+import { Link } from "react-router-dom";
 
 export default function Pokedex() {
   const [pokemons, setPokemons] = useState([])
@@ -15,6 +16,12 @@ export default function Pokedex() {
     }
   }
 
+  const clearPokedex = () => {
+    localStorage.clear()
+
+    setPokemons([]);
+  }
+
   useEffect(() => {
     (async () => {
       setPokemons(JSON.parse(localStorage.getItem('pokedex')));
@@ -24,13 +31,24 @@ export default function Pokedex() {
   return (
     <div className='App-main'>
       <h1 className="my-5">POKEDEX</h1>
+      <div className="row w-50">
+        <div className="col-6">
+          <Link to="/">
+            <button className="btn btn-info">Retourner à la liste des Pokemon</button>
+          </Link>
+        </div>
+        <div className="col-6">
+          <button className="btn btn-danger" onClick={() => clearPokedex()}>
+            Supprimer le pokedex
+          </button>
+        </div>
+
+      </div>
       <div className='container mb-5'>
-        {Object.values(pokemons).map((pokemon) => {
+        {Object.values(pokemons)?.map((pokemon) => {
           return <ElementListPokemon
-            id={pokemon.id}
-            name={pokemon.name}
-            types={pokemon.types}
-            image={pokemon.sprites.front_default}
+            key={pokemon.id}
+            pokemon={pokemon}
             pokedex={deleteFromPokedex}
           />
         })}

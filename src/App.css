@@ -24,6 +24,11 @@
   color: white;
 }
 
+a {
+  text-decoration: none;
+  color: white !important;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -62,7 +67,7 @@
 }
 
 .width-row {
-  width: 75%;
+  width: 100%;
   transition: transform 0.3s
 }
 
@@ -70,14 +75,15 @@
   transform: scale(1.05)
 }
 
+.titre {
+  font-size: large;
+  font-weight: 600;
+}
+
 @media screen and (max-width: 767px) {
   .content {
     margin: 0 !important;
     padding: 0 !important;
     max-width: none;
-  }
-
-  .width-row {
-    width: 100%;
   }
 }
