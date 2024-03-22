@@ -6,7 +6,7 @@ const ElementListPokemon = ({ id, name, types, image, pokedex }) => {
         <div>
             <Link
                 to={`/pokemon/${id}`}
-                className='row mt-1 w-75 m-auto'
+                className='row mt-1 width-row m-auto'
                 style={{ textDecoration: ' none', color: 'white' }}
             >
                 <div className='col-2'>
