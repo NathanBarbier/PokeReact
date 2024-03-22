@@ -5,10 +5,8 @@ import Card from 'react-bootstrap/Card';
 import axios from "axios";
 import { Container } from "react-bootstrap";
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 const Pokemon = () => {
-    // Retrieve pokemon id from URL
     const { pokemonId } = useParams();
 
     const [pokemon, setPokemon] = useState({});
@@ -23,9 +21,21 @@ const Pokemon = () => {
         fetchData();
     }, []);
 
-    console.log(pokemon.sprites?.front_default)
+    const addToPokedex = () => {
+        const currentData = JSON.parse(localStorage.getItem('pokedex'));
 
-    // to implement 
+        if (currentData && currentData[pokemon.id]) {
+            alert('le pokemon est déjà dans le pokedex')
+            return
+        }
+
+        currentData[pokemon.id] = pokemon
+
+        localStorage.setItem('pokedex', JSON.stringify(currentData));
+
+        alert('le pokemon a été ajouté au pokedex')
+    };
+
     return (
         <Container style={{marginInline: 'auto', alignItems: 'center', justifyContent: 'center'}}>
             <Row>
@@ -54,7 +64,7 @@ const Pokemon = () => {
                         ))}
                     </ul>
                     </Card.Text>
-                    <Button variant="outline-success" style={{marginTop: '25px', width: '50%', textAlign: 'center', marginInline: 'auto'}}>
+                    <Button onClick={() => addToPokedex(pokemon)} variant="outline-success" style={{marginTop: '25px', width: '50%', textAlign: 'center', marginInline: 'auto'}}>
                         Ajouter au pokédex
                     </Button>
                 </Card.Body>
