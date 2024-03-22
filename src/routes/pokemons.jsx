@@ -65,6 +65,16 @@ export default function Pokemons() {
           />
         })}
       </div>
+      <div className="container w-50 mb-5">
+        <div className='row'>
+          <div className="col-lg-6 mt-2">
+            <button className='my-btn' onClick={() => { page > 0 && setPage(page - 1) }}>Précédent</button>
+          </div>
+          <div className="col-lg-6 mt-2">
+            <button className='my-btn' onClick={() => { setPage(page + 1) }}>Suivant</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

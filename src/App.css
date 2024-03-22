@@ -44,3 +44,40 @@
   font: white;
   font-size: large;
 }
+
+.my-btn {
+  border: none;
+  width: 200px;
+  height: 60px;
+  color: black;
+  border-radius: 20px;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  font-weight: 600;
+  transition: transform 0.3s;
+}
+
+.my-btn:hover {
+  transform: scale(1.1);
+}
+
+.width-row {
+  width: 75%;
+  transition: transform 0.3s
+}
+
+.width-row:hover {
+  transform: scale(1.05)
+}
+
+@media screen and (max-width: 767px) {
+  .content {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none;
+  }
+
+  .width-row {
+    width: 100%;
+  }
+}
